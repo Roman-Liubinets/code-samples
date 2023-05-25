@@ -1,0 +1,48 @@
+<mat-icon aria-label="Close icon" (click)="close()">close</mat-icon>
+<h3>
+  {{
+    ((isNew ? "BUTTON.ADD" : "BUTTON.EDIT") | translate) +
+      " " +
+      ("COMMON.LINK" | translate)
+  }}
+</h3>
+<form [formGroup]="addLinkForm">
+  <mat-form-field>
+    <mat-label>{{ "COMMON.LINK_TYPE" | translate }}</mat-label>
+    <mat-select disableRipple formControlName="linkType">
+      <mat-option *ngFor="let typeLink of typesLink" value="{{ typeLink.id }}">
+        {{ "ELEMENT." + typeLink.name.toUpperCase() | translate }}
+      </mat-option>
+    </mat-select>
+    <mat-error>{{ "ERROR.REQUIRED_FIELD" | translate }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="{{ 'COMMON.TITLE' | translate }}"
+      formControlName="title"
+    />
+    <mat-error *ngIf="hasError('title', 'required')">{{
+      "ERROR.REQUIRED_FIELD" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <mat-form-field>
+    <input
+      matInput
+      placeholder="{{
+        (addLinkForm?.value?.linkType == materialsEnum.moodleCourse ||
+        addLinkForm?.value?.linkType == materialsEnum.talentLMS
+          ? 'ELEMENT.COURSE_ID'
+          : 'COMMON.LINK'
+        ) | translate
+      }}"
+      formControlName="link"
+    />
+    <mat-error *ngIf="hasError('link', 'required')">{{
+      "ERROR.REQUIRED_FIELD" | translate
+    }}</mat-error>
+  </mat-form-field>
+  <button mat-raised-button color="company-filled-button" (click)="send()">
+    {{ (isNew ? "BUTTON.CREATE" : "BUTTON.SAVE") | translate }}
+  </button>
+</form>

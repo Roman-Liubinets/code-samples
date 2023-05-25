@@ -1,0 +1,57 @@
+<div class="table-wrapper">
+  <table mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8">
+    <ng-container matColumnDef="select">
+      <th mat-header-cell *matHeaderCellDef>
+        <mat-checkbox
+          (change)="$event ? masterToggle() : null"
+          [checked]="selection.hasValue() && isAllSelected()"
+          [indeterminate]="selection.hasValue() && !isAllSelected()"
+          [aria-label]="checkboxLabel()"
+        >
+        </mat-checkbox>
+      </th>
+      <td mat-cell *matCellDef="let row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="$event ? selection.toggle(row) : null"
+          [checked]="selection.isSelected(row)"
+          [aria-label]="checkboxLabel(row)"
+        >
+        </mat-checkbox>
+      </td>
+    </ng-container>
+    <ng-container *ngFor="let column of displayedColumns">
+      <ng-container *ngIf="column != 'select'" [matColumnDef]="column">
+        <th mat-header-cell *matHeaderCellDef>{{ column | titlecase }}</th>
+        <td mat-cell *matCellDef="let element">{{ element[column] }}</td>
+      </ng-container>
+    </ng-container>
+    <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+  <div class="footer-section">
+    <div class="errors-section" *ngIf="error?.length">
+      <mat-icon color="menu-icon">error</mat-icon>
+      <div [innerHTML]="error"></div>
+    </div>
+    <div class="buttons-section">
+      <button
+        mat-raised-button
+        color="company-ghost-button"
+        (click)="closeDialog()"
+      >
+        {{ "BUTTON.CANCEL" | translate }}
+      </button>
+      <button
+        [attr.disabled]="selection?.isEmpty()"
+        [disabled]="selection?.isEmpty()"
+        mat-raised-button
+        (click)="saveList()"
+        color="company-filled-button"
+      >
+        {{ "BUTTON.SAVE" | translate }}
+      </button>
+    </div>
+  </div>
+</div>
+<div class="close-dialog" (click)="closeDialog()"></div>

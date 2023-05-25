@@ -1,0 +1,86 @@
+@import "../styles/variables.scss";
+
+.table-wrapper {
+  width: 100%;
+  overflow: auto;
+}
+
+.mat-elevation-z8 {
+  max-height: calc(100% - 42px);
+  overflow-y: auto;
+}
+
+.mat-cell,
+.mat-header-cell {
+  min-width: 200px;
+}
+
+.mat-column-select {
+  min-width: unset;
+  padding-right: 24px;
+}
+
+table {
+  box-shadow: none;
+  display: block;
+  max-height: calc(100vh - 200px) !important;
+}
+
+th {
+  font-size: 12px;
+  font-weight: bold;
+  color: $table-title;
+}
+
+td {
+  font-size: 14px;
+  font-weight: 500;
+  color: $text-color;
+}
+
+.footer-section {
+  padding: 30px 6px 6px 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.errors-section {
+  display: flex;
+  max-width: 70%;
+  font-size: 12px;
+  color: $error-color;
+
+  mat-icon {
+    margin-right: 10px;
+  }
+}
+
+.buttons-section {
+  display: flex;
+  justify-content: flex-end;
+
+  button.mat-raised-button {
+    &:first-child {
+      margin-right: 30px;
+    }
+
+    padding: 0 35px;
+
+    &.mat-ghost-button {
+      background-color: transparent;
+      border: 1px solid $button-background;
+      color: $button-background;
+      font-weight: bold;
+    }
+
+    &.mat-filled-button {
+      background-color: $button-background;
+      color: $button-color;
+      font-weight: bold;
+
+      &[disabled] {
+        opacity: 0.5;
+      }
+    }
+  }
+}

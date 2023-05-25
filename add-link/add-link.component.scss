@@ -1,0 +1,40 @@
+@import "../styles/variables.scss";
+host {
+  width: 450px;
+  display: block;
+}
+
+mat-icon {
+  display: block;
+  margin-left: auto;
+  cursor: pointer;
+  color: $text-title;
+  font-size: 16px;
+}
+
+h3 {
+  font-size: 16px;
+  text-align: center;
+  color: $text-title;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  padding: 20px 15px 10px 15px;
+}
+
+button {
+  margin-top: 40px;
+  align-self: center;
+
+  &.mat-raised-button {
+    padding: 0 35px;
+
+    &.mat-sign-in-form {
+      background-color: $button-background;
+      color: $button-color;
+      font-weight: bold;
+    }
+  }
+}

@@ -1,0 +1,28 @@
+<div class="cropper-container">
+  <image-cropper
+    *ngIf="base64Image"
+    autoCrop="false"
+    #imageCropper
+    [imageBase64]="base64Image"
+    [aspectRatio]="cropperConfiguration?.aspectRatio"
+    outputType="file"
+    [resizeToWidth]="800"
+    [cropperMinWidth]="128"
+    [onlyScaleDown]="true"
+    [roundCropper]="cropperConfiguration?.roundCropper"
+    [imageQuality]="92"
+    [alignImage]="'left'"
+    (imageCropped)="imageCropped($event)"
+  ></image-cropper>
+  <br />
+  <button mat-raised-button color="company-filled-button" (click)="crop()">
+    {{'BUTTON.CROP' | translate}}
+  </button>
+  <button
+    mat-raised-button
+    (click)="dialogRef.close()"
+    [style.margin-top.px]="'10'"
+  >
+    {{'BUTTON.CANCEL' | translate}}
+  </button>
+</div>
